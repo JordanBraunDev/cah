@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte
+{% endblock %}
+
+{% block body %}
+
+<div class="mt-8">
+	<div class="bg-grey w-full h-1/6 flex py-3">
+		<div class="pl-16 w-3/12 md:pl-20 md:pl-28 xl:pl-36">
+			<img class="pr-3" src="{{ user.profilImage != null ? asset("uploads/user_image/") ~ user.profilImage : asset("assets/images/avatar.jpg") }}" alt="Avatar">		
+			<p class="mt-2 text-center font-normal">Niveau : <span class="font-extrabold text-blue">{{ user.level }} </span></p>
+		</div>
+		<div class="flex flex-col w-8/12">
+			<h1 class="font-bold text-blue flex">{{ user.prenom }} {{ user.nom }}</h1>
+			<p class="flex-none h-28 xl:h-52 pt-2">{{ user.description }}</p>
+			<div class="flex flex-col">
+				<p>Niveau : <span class="font-extrabold text-blue">{{ user.level }}</span></p>
+				<div class="shadow w-full bg-grey-light">
+    				<div class="bg-blue text-xs leading-none py-1 text-center text-white" style="width: {{ user.xp }}%">{{ user.xp }}%</div>
+  				</div>
+			</div>
+		{% if (app.user.roles[0] exists and app.user.roles[0] == "ROLE_ADMIN") %}
+			<a class="underline font-bold" href="{{ path('admin_fiche_edit',  {'pseudo' : user.pseudo}) }}" type="button">Modifier</a>
+		{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="grid grid-cols-5 gap-4 mt-3">
+	<div class="text-right col-span-2">
+		<h2 class="font-bold p-2"></h2>
+	</div>
+	<div class="col-span-3">
+		<h2 class=" font-bold p-2"></h2>
+		<div>
+
+		</div>
+	</div>
+
+</div>
+	{% endblock %}

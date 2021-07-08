@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier son mot de passe
+{% endblock %}
+
+{% block body %}
+
+	<div class="text-center p-0 font-sans">
+
+		<h1 class="text-blue text-3xl font-medium font-cursive">Modifier mon mot de passe</h1>
+		<h2 class="text-pink pt-4 mx-2">Saisissez au moins 8 caractères, dont une majuscule, une minuscule, et un chiffre, sans caractères spéciaux (ex : #, @, &, etc...)</h2>
+	</div>
+
+	{% for message in app.flashes('error') %}
+		<div class="col-xs4">
+			<div class="p-3 my-2 error">{{message}}</div>
+		</div>
+	{% endfor %}
+	<div class="md:w-3/5 max-w-lg mx-auto lg:my-24 my-2 px-3 py-2">
+		<form method="post">
+			<div class="mt-8">
+				<label for="pass">Nouveau mot de passe</label>
+				<input type="password" id="pass" name="pass" class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-grey shadow-md focus:bg-white focus:border-grey focus:outline-none">
+			</div>
+			<div class="mt-8">
+				<label for="pass2">Confirmer le mot de passe</label>
+				<input type="password" id="pass2" name="pass2" class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-grey shadow-md focus:bg-white focus:border-grey focus:outline-none">
+			</div>
+			<div class="flex lg:justify-between lg:flex-row flex-col lg:w-full mt-8">
+				<div></div>
+				<div class="text-center">
+					<button class="border border-blue text-blue rounded-md px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-blue focus:outline-none focus:shadow-outline">Enregistrer les modifications</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+{% endblock %}

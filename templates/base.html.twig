@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{# FONTS #}
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+		{# CALENDAR #}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/0434b5e439.js" crossorigin="anonymous"></script>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		{# start of page with nav #}
+			<header class="bg-white">
+				<div class="max-w-7xl mx-auto px-8">
+					<div class="flex items-start justify-between">
+						<div class="w-full justify-between flex items-start">
+							<a href="/">
+								<img class="w-40 h-40 top-32" src="{{asset("assets/images/logo01.png")}}" alt="Logo"/>
+							</a>
+							<div class="hidden md:block pt-3">
+								<div class="ml-10 flex items-baseline space-x-4">
+									{% if app.user %}
+									<a href="{{ path('dashboard', {'pseudo' : app.user.pseudo}) }}" type="button" class="border border-blue rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-blue focus:outline-none focus:shadow-outline">
+										Mon compte
+									</a>
+									<a class="text-blue hover:text-blue px-3 py-2 rounded-md text-sm font-medium" href="{{ path('profil_edit') }}">
+										Modifier mon profil
+									</a>
+									<a class="text-blue hover:text-blue px-3 py-2 rounded-md text-sm font-medium" href="{{ path('app_logout') }}">
+										Déconnexion
+									</a>
+									{% else %}
+										<a class="text-blue hover:text-blue px-3 py-2 rounded-md text-sm font-medium" href="{{ path('login') }}">
+											Me connecter
+										</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+
+
+			{# Content of pages #}
+
+			<div class="content">
+				{% block body %}
+				<div class="text-center ml-24">
+					<h1>
+						Bienvenue sur CAH'Roule ! 
+					</h1>
+					<p>
+						Cette plateforme a été créée afin de permettre de suivre les joueurs dans leur avancée dans les différents jeux!
+						Pour commencer, <a href="{{ path('app_register') }}" class="underline">inscrivez-vous</a>.
+					</p>
+					<p>Vous êtes déjà inscrit ? Dans ce cas, <a href="{{ path('login') }}" class="underline">connectez-vous</a> !</p>
+				</div>
+				{% endblock %}
+			</div>
+
+		<footer class="grid grid-cols-12 gap-2 z-40">
+				<div class="text-right col-span-2">
+					<img src="{{ asset("assets/images/caf_logo.png") }}" class="w-20 transform -rotate-12 ml-10"/>
+				</div>
+				<div class="col-span-8 text-center">
+					<p>Mentions légales - Statuts - Adresses de périscolaires</br>
+					<span>Centre Social et Culturel Robert Schuman - 6 Place Robert Schuman - 67500 HAGUENAU</span></br>
+					<span>Nous restons à votre disposition pour vous renseigner et vous aider dans vos démarches  :</span></br>
+					<span>Tél : 03 88 06 18 48  contact@csc-haguenau.fr  Antenne Centre-ville</span></br>
+					<span>Tél : 03 88 06 91 14  pins@csc-haguenau.fr  Antenne Les Pins</span></p>
+				</div>
+				<div class="col-span-2">
+					<img src="{{ asset("assets/images/logo.png") }}" class="w-44"/>
+				<div>
+		</footer>
+		{# Blue triangle thing #}
+		<div class="triangle-left fixed bottom-0 left-0 z-30"></div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+		
+	</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+{% block javascripts %}{% endblock %}

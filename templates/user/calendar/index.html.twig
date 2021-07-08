@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block body %}
+    {{ app.user.calendar }}
+
+    <h1>Les événements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Description</th>
+                <th>Toute la journée</th>
+                <th>Couleur de fond</th>
+                <th>Couleur de texte</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>{{ calendar.allDay ? 'Yes' : 'No' }}</td>
+                <td>{{ calendar.backgroundColor }}</td>
+                <td>{{ calendar.textColor }}</td>
+                <td>
+                    <a href="{{ path('calendar_show', {'id': calendar.id}) }}">Afficher l'événement</a>
+                    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">Modifier l'événement</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Vous n'avez pas de calendrier</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('calendar_new') }}">Créer un événement</a>
+{% endblock %}

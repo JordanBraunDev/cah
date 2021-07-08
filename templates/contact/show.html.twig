@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <h1>Contact</h1>
+
+    <h2>Voulez-vous vraiment supprimer ce contact ?</h2>
+    <tbody>
+    {# Loop on users #}
+    {% for contacts in contact %} 
+        <tr>
+            <td>{{contacts.nom}}</td>
+            <td>{{contacts.prenom}}</td>
+            <td>{{contacts.email}}</td>
+            <td>{{contacts.statut}}</td>
+
+        </tr>
+     {% endfor %}
+    </table>
+
+    {{ include('contact/_delete_form.html.twig') }}
+
+{% endblock %}

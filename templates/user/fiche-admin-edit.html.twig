@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de {{ user.prenom }} {{ user.nom }}{% endblock %}
+
+{% block body %}
+
+<div class="container max-w-full mx-auto md:py-24 px-6">
+  <div class="max-w-sm mx-auto px-6">
+        <div class="relative flex flex-wrap">
+            <div class="w-full relative">
+                <div class="md:mt-6">
+                <div class="text-center font-semibold text-black">
+                        {{ user.prenom }} {{ user.nom }}
+                         <h2>Equipe {{ user.equipe }}</h2>
+                    </div>
+
+                        {{ form_start(form, {
+                            'attr': {'class': "mt-8"}
+                        }) }}
+                        <div class="mx-auto max-w-lg flex flex-col">
+                        <img class="object-scale-down rounded-full inline-block h-16 w-16 mx-auto" src="{{ user.profilImage != null ? asset("uploads/user_image/") ~ user.profilImage : asset("assets/images/avatar.jpg") }}" alt="Avatar">
+                        <div class="py-1">
+                            {{ form_label(form.level, null, {
+                                'label': 'Level'  
+                            })  
+                            }}
+                            {{ form_widget(form.level, {
+                                'attr': {'class': 'text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-grey shadow-md focus:bg-white focus:border-grey focus:outline-none'}    
+                            })   
+                            }}
+                        </div>
+                        <div class="py-1">
+                            {{ form_label(form.xp, null, {
+                                'label': 'Xp'  
+                            })  
+                            }}
+                            {{ form_widget(form.xp, {
+                                'attr': {'class': 'text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-grey shadow-md focus:bg-white focus:border-grey focus:outline-none'}    
+                            })   
+                            }}
+                        </div>
+
+                            <button class="border border-blue text-blue rounded-md px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-blue focus:outline-none focus:shadow-outline">Enregistrer les modifications</button>
+                         </div>   
+                            </div>
+                        {{ form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

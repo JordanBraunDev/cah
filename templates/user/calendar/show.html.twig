@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block body %}
+{{ app.user.calendar }}
+    <h1>Calendrier</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ calendar.title }}</td>
+            </tr>
+            <tr>
+                <th>Début</th>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin</th>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ calendar.description }}</td>
+            </tr>
+            <tr>
+                <th>Toute la journée</th>
+                <td>{{ calendar.allDay ? 'Yes' : 'No' }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('calendar_index') }}" class="btn btn-primary mr-2 mb-2">Retourner à la liste des événements</a>
+
+    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}" class="btn btn-primary mb-2">Modifier</a>
+
+    {{ include('user/calendar/_delete_form.html.twig') }}
+{% endblock %}
