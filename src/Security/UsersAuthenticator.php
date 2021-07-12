@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -96,8 +97,11 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('registered'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        $slugger = new Slugify();
+        $pseudo = empty($request->request->all()['pseudo']) ? $request->request->all()['registration_form']['pseudo'] : $request->request->all()['pseudo'];
+        $slugger->slugify($pseudo);
+        return new RedirectResponse($this->urlGenerator->generate('fiche_user', ['pseudo'=> $pseudo]));
+        //throw new \Exception('TODO: provide a valid redirect inside '.FILE);
     }
 
     protected function getLoginUrl()

@@ -9,7 +9,6 @@ use App\Security\UsersAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -54,10 +53,11 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/registered", name="registered")
      */
-    public function registered(UserInterface $user): Response
+    public function registered(User $user): Response
     {
         return $this->redirectToRoute('dashboard', [
             'pseudo' => $user->getSlug(),
