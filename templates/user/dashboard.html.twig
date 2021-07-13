@@ -20,7 +20,7 @@
     				<div class="bg-blue text-xs leading-none py-1 text-center text-white" style="width: {{ user.xp }}%">{{ user.xp }}%</div>
   				</div>
 			</div>
-		{% if (app.user.roles[0] exists and app.user.roles[0] == "ROLE_ADMIN") %}
+		{% if "ROLE_ADMIN" in app.user.roles %}
 			<a class="underline font-bold" href="{{ path('admin_fiche_edit',  {'pseudo' : user.pseudo}) }}" type="button">Modifier</a>
 		{% endif %}
 		</div>

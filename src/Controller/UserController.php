@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Cocur\Slugify\Slugify;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -23,16 +24,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class UserController extends AbstractController
 {
     /**
-     * @Route("{pseudo}/fiche", name="dashboard")
+     * @Route("/{pseudo}/fiche", name="fiche_user")
      */
-    public function dashboard($pseudo, UserRepository $userRepository): Response
+    public function dashboard(User $user): Response
     {
-        $user = $userRepository->findOneBy(['slug' => $pseudo]);
-        if (!$user) {
-            // throw 404 if the book doesn't exist
-            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
-        }
-        $userId = $user->getId();
         return $this->render('user/dashboard.html.twig', [
             'user' => $user,
         ]);
