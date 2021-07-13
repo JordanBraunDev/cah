@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+
 class UserController extends AbstractController
 {
     /**
@@ -28,6 +29,7 @@ class UserController extends AbstractController
      */
     public function dashboard(User $user): Response
     {
+        $user->getPseudo();
         return $this->render('user/dashboard.html.twig', [
             'user' => $user,
         ]);
@@ -79,6 +81,7 @@ class UserController extends AbstractController
                     
                     $profilData->setProfilImage($newFilename);
                 }
+                
                 $user->setSlug($slugger->slugify($user->getPseudo()));
                 $em->persist($user);
                 $em->flush();
