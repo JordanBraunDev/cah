@@ -7,8 +7,8 @@
 
 <!-- component -->
 <div class="overflow-x-auto">
-        <div class="flex items-center justify-center font-sans overflow-hidden w-3/5">
-            <div class="lg:w-5/6">
+        <div class="flex items-center justify-center font-sans overflow-hidden">
+            <div class="w-4/5 lg:w-5/6">
                 <div class="bg-white shadow-md rounded my-6">
                     <table class="min-w-max w-full table-auto">
                         <thead>
@@ -16,7 +16,6 @@
                                 <th class="py-3 px-6 text-left">Nom de l'activité</th>
                                 <th class="py-3 px-6 text-left">Début</th>
                                 <th class="py-3 px-6 text-center">Fin</th>
-                                <th class="py-3 px-6 text-center">Description</th>
                                 <th class="py-3 px-6 text-center">Actions</th>
                             </tr>
                         </thead>
@@ -39,9 +38,6 @@
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    <span class="py-1 px-3 break-words">{{ calendar.description }}</span>
-                                </td>
-                                <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center">
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <a href="{{ path('calendar_show', {'id': calendar.id}) }}">
@@ -51,6 +47,7 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        {% if "ROLE_ADMIN" in app.user.roles %}
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,6 +55,7 @@
                                                 </svg>
                                             </a>
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
@@ -68,6 +66,10 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <div></div>
+                    <a href="{{ path('calendar') }}" class="underline mr-2 mb-2">Retourner au calendrier</a>
                 </div>
             </div>
         </div>
