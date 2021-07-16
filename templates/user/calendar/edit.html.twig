@@ -1,13 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Calendar{% endblock %}
+{% block title %}Modifier l'évènement{% endblock %}
 
 {% block body %}
-    <h1>Modifier l'événement</h1>
+<div class="flex flex-col items-center justify-center">
+    
+    {{ form_start(form) }}
 
-    {{ include('user/calendar/_form.html.twig', {'button_label': 'Modifier'}) }}
+        <div class="py-6 flex flex-col justify-center sm:py-12">
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+            <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+            <div class="max-w-md mx-auto">
+                <div class="flex items-center space-x-5">
+                <div class="block pl-2 font-semibold text-xl self-start">
+                    <h2 class="leading-relaxed">Modifier l'évènement</h2>
+                </div>
+                </div>
+                <div class="divide-y divide-grey">
+                <div class="py-8 text-base leading-6 space-y-4 sm:text-lg sm:leading-7">
+                    <div class="flex flex-col">
+                    {{ form_label(form.title, null, {
+                        "label_attr": {
+                            "class" :"leading-loose"
+                        }
+                    }) }}
+                    {{ form_widget(form.title, {
+                        "attr": {
+                            "class": "px-4 py-2 border focus:ring-grey focus:border-grey w-full sm:text-sm border-grey rounded-md focus:outline-none"
+                        }
+                    }) }}
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex flex-col">
+                            {{ form_label(form.start, null, {
+                        "label_attr": {
+                            "class" :"leading-loose"
+                        }
+                        }) }}
+                            {{ form_widget(form.start) }}
+                        </div>
+                        <div class="flex flex-col">
+                            {{ form_label(form.end, null, {
+                        "label_attr": {
+                            "class" :"leading-loose"
+                        }
+                        }) }}
+                            {{ form_widget(form.end) }}
+                        </div>
+                    </div>
+                    </div>
+                    <div class="flex flex-col">
+                    {{ form_label(form.description, null, {
+                        "label_attr": {
+                            "class": "leading-loose"
+                        }
+                    }) }}
+                    {{ form_widget(form.description, {
+                        "attr": {
+                            "class": "px-4 py-2 border focus:ring-grey focus:border-grey w-full sm:text-sm border-grey rounded-md focus:outline-none"
+                        }
+                    }) }}
+                    </div>
+                </div>
+                <div class="pt-4 flex items-center space-x-4">
+                    <button class="flex justify-center items-center w-full px-4 py-3 rounded-md focus:outline-none">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Annuler
+                    </button>
+                    <button class="bg-blue flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Créer</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
 
-    <a href="{{ path('calendar_index') }}">Liste des événements</a>
-
-    {{ include('user/calendar/_delete_form.html.twig') }}
+    {{ form_end(form) }}
+    
+    </div>
 {% endblock %}

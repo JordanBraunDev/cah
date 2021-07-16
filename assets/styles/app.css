@@ -71,3 +71,13 @@ body {
 .content {
     flex-grow: 1;
 }
+
+#calendar_start_date {
+    border: #dee2e6 1px solid;
+    border-radius: 5px;
+    padding: 0.2em 0.4em;
+}
+
+.form-control {
+    margin: 0.3em 2px 0.3em 2px;
+}

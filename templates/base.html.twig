@@ -29,6 +29,9 @@
 							<div class="hidden md:block pt-3">
 								<div class="ml-10 flex items-baseline space-x-4">
 									{% if app.user %}
+									<a class="text-blue hover:text-blue px-3 py-2 rounded-md text-sm font-medium" href="{{ path('calendar') }}">
+										Activités
+									</a>
 									<a href="{{ path('fiche_user', {'pseudo' : app.user.pseudo}) }}" type="button" class="border border-blue rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-blue focus:outline-none focus:shadow-outline">
 										Mon compte
 									</a>

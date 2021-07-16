@@ -2,42 +2,36 @@
 
 namespace App\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use App\Entity\Calendar;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class CalendarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, [
+            ->add('title', TextType::class, [
                 'label' => 'Titre ',
             ])
             ->add('start', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'label' => 'Début ',
+                'format' => 'dd-MM-yyyy',
             ])
             ->add('end', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'label' => 'Fin ',
+                'format' => 'dd-MM-yyyy',
             ])
-            ->add('description', null, [
+            ->add('description', TextType::class, [
                 'label' => 'Description ',
-            ])
-            ->add('all_day', CheckboxType::class, [
-                'label' => 'Toute la journée ',
-                'required' => false,
-            ] )
-            ->add('background_color', ColorType::class, [
-                'label' => 'Couleur de fond ',
-            ])
-            ->add('text_color', ColorType::class, [
-                'label' => 'Couleur de texte '
             ])
         ;
     }

@@ -3,38 +3,52 @@
 {% block title %}Calendar{% endblock %}
 
 {% block body %}
-{{ app.user.calendar }}
-    <h1>Calendrier</h1>
+    <div class="flex items-center justify-center mt-5">
+        <div class="relative bg-white w-3/5 py-6 px-6 rounded-3xl my-4 shadow-xl">
+            <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl bg-blue-500 left-4 -top-6">
+                <!-- svg  -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+            </div>
+            <div class="mt-8">
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-xl font-semibold my-2">{{ calendar.title }}</p>
+                        <div class="flex space-x-2 text-gray-400 text-sm">
+                            <!-- svg  -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</p> 
+                        </div>
+                        <div class="flex space-x-2 text-gray-400 text-sm my-3">
+                            <!-- svg  -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</p> 
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-items-end">
+                        <a href="{{ path('calendar_edit', {'id': calendar.id}) }}" class="btn bg-blue text-white mb-2">Modifier</a>
+                        {{ include('user/calendar/_delete_form.html.twig') }}
+                    </div>
+                </div>
+                <div class="border-t-2 "></div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Titre</th>
-                <td>{{ calendar.title }}</td>
-            </tr>
-            <tr>
-                <th>Début</th>
-                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Fin</th>
-                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ calendar.description }}</td>
-            </tr>
-            <tr>
-                <th>Toute la journée</th>
-                <td>{{ calendar.allDay ? 'Yes' : 'No' }}</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <a href="{{ path('calendar_index') }}" class="btn btn-primary mr-2 mb-2">Retourner à la liste des événements</a>
-
-    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}" class="btn btn-primary mb-2">Modifier</a>
-
-    {{ include('user/calendar/_delete_form.html.twig') }}
+                <div>
+                    <div class="my-2">
+                        <p class="font-semibold text-base mb-2">Description</p>
+                        <div class="flex space-x-2">
+                            <p class="word-breaks">{{ calendar.description }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{{ path('calendar_index') }}" class="underline mr-2 mb-2">Retourner à la liste des événements</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
